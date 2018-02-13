@@ -1,5 +1,5 @@
 start:
-	npm run babel-node -- 'src/bin/gendiff.js' __tests__/__fixtures__/before.json __tests__/__fixtures__/after.json
+	npm run babel-node -- 'src/bin/page-loader.js' --output /home/deadmp3/projects/page-loader/tmp https://hexlet.io/courses
 
 install:
 	npm install

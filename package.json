@@ -32,7 +32,10 @@
   },
   "homepage": "https://github.com/deadmp3/page-loader#readme",
   "dependencies": {
-
+    "commander": "*",
+    "axios": "*",
+    "mz": "*",
+    "nock": "*"
   },
   "devDependencies": {
     "babel-cli": "*",
