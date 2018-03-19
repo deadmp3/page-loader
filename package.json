@@ -1,6 +1,6 @@
 {
   "name": "page-loader-sergey",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Load a web page",
   "main": "dist/index.js",
   "bin": {
@@ -48,6 +48,7 @@
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
     "eslint-plugin-jest": "*",
-    "jest": "*"
+    "jest": "*",
+    "rimraf": "*"
   }
 }
