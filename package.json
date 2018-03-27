@@ -1,6 +1,6 @@
 {
   "name": "page-loader-sergey",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Load a web page",
   "main": "dist/index.js",
   "bin": {
