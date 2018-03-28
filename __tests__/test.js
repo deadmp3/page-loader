@@ -28,12 +28,11 @@ const compare = async (path1, path2) => {
 
 test('save page', async () => {
   const host = 'http://test.com';
-  const pathPage = path.join(__dirname, '__fixtures__/page.html');
   const pathFavicon = path.join(__dirname, '__fixtures__/favicon.ico');
   const pathRuby = path.join(__dirname, '__fixtures__/ruby.png');
   nock(host)
     .get('/page')
-    .reply(200, await fs.readFile(pathPage, 'utf8'));
+    .reply(200, await fs.readFile(path.join(__dirname, '__fixtures__/page.html'), 'utf8'));
   nock(host)
     .get('/assets/icons/default/favicon.ico')
     .reply(200, await fs.readFile(pathFavicon));
@@ -45,7 +44,7 @@ test('save page', async () => {
   const pathFiles = 'test-com-page_files';
 
   await loader(page, dir);
-  await compare(path.join(dir, 'test-com-page.html'), pathPage);
+  await compare(path.join(dir, 'test-com-page.html'), path.join(__dirname, '__fixtures__/localPage.html'));
   await compare(path.join(dir, pathFiles, 'assets-icons-default-favicon.ico'), pathFavicon);
   await compare(path.join(dir, pathFiles, 'images-ruby.png'), pathRuby);
 });

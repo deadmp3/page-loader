@@ -35,7 +35,8 @@
     "commander": "*",
     "axios": "*",
     "mz": "*",
-    "nock": "*"
+    "nock": "*",
+    "cheerio": "*"
   },
   "devDependencies": {
     "babel-cli": "*",
