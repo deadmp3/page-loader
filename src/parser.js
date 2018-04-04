@@ -1,5 +1,4 @@
 import cheerio from 'cheerio';
-import url from 'url';
 
 const sourcesTag = [
   {
@@ -16,9 +15,7 @@ const sourcesTag = [
   },
 ];
 
-export const isLocalLink = link => !url.parse(link).hostname;
-
-export const getLinks = (html) => {
+export default (html) => {
   const arr = [];
   const $ = cheerio.load(html);
   sourcesTag.forEach(({ tag, src }) =>
