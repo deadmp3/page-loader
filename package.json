@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "DEBUG=loader* jest",
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
@@ -36,7 +36,9 @@
     "axios": "*",
     "mz": "*",
     "nock": "*",
-    "cheerio": "*"
+    "cheerio": "*",
+    "lodash": "*",
+    "debug": "*"
   },
   "devDependencies": {
     "babel-cli": "*",
