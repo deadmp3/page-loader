@@ -6,6 +6,7 @@ import os from 'os';
 import fs from 'mz/fs';
 import path from 'path';
 import rimraf from 'rimraf';
+import errno from 'errno';
 
 import loader from '../src';
 
@@ -47,4 +48,54 @@ test('save page', async () => {
   await compare(path.join(dir, 'test-com-page.html'), path.join(__dirname, '__fixtures__/localPage.html'));
   await compare(path.join(dir, pathFiles, 'assets-icons-default-favicon.ico'), pathFavicon);
   await compare(path.join(dir, pathFiles, 'images-ruby.png'), pathRuby);
+});
+
+test('missing page', async () => {
+  expect.assertions(1);
+  const host = 'http://test.com';
+  nock(host)
+    .get('/missing-page')
+    .reply(404);
+  const page = `${host}/missing-page`;
+  try {
+    await loader(page, dir);
+  } catch (err) {
+    expect(err.errno).toBe(errno.code.EADDRNOTAVAIL.errno);
+  }
+  // return loader(page, dir).catch(err => expect(err.errno).toBe(errno.code.EADDRNOTAVAIL.errno));
+});
+
+test('a file page exist', async () => {
+  expect.assertions(1);
+  const host = 'http://test.com';
+  const file = '<!DOCTYPE html><html><body></body></html>';
+  nock(host)
+    .get('/page-exist')
+    .reply(200, file);
+  const page = `${host}/page-exist`;
+  try {
+    await loader(page, dir);
+    await loader(page, dir);
+  } catch (err) {
+    expect(err.errno).toBe(errno.code.EEXIST.errno);
+  }
+  // return loader(page, dir)
+  //   .then(() => loader(page, dir).catch(err => expect(err.errno).toBe(errno.code.EEXIST.errno)));
+});
+
+test('output directory does not exist', async () => {
+  expect.assertions(1);
+  const host = 'http://test.com';
+  const file = '<!DOCTYPE html><html><body></body></html>';
+  nock(host)
+    .get('/page-exist')
+    .reply(200, file);
+  const page = `${host}/page-exist`;
+  const dirNotExist = path.join(dir, 'not-exist');
+  try {
+    await loader(page, dirNotExist);
+  } catch (err) {
+    expect(err.errno).toBe(errno.code.ENOENT.errno);
+  }
+  // return loader(page, dirNotExist).catch(err => expect(err.errno).toBe(errno.code.ENOENT.errno));
 });

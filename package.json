@@ -38,7 +38,8 @@
     "nock": "*",
     "cheerio": "*",
     "lodash": "*",
-    "debug": "*"
+    "debug": "*",
+    "errno": "*"
   },
   "devDependencies": {
     "babel-cli": "*",
